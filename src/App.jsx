@@ -1,9 +1,20 @@
 import { useState } from 'react';
+import { useEffect } from 'react';
+import axios from 'axios';
 
 export default function App() {
   const [friends, setFriends] = useState([]);
   const [picture, setPicture] = useState('');
   const [name, setName] = useState('');
+
+  async function getSavedFriends() {
+    const res = await axios.get('/api/friends');
+    setFriends(res.data);
+  };
+
+  useEffect(() => {
+    getSavedFriends()
+  }, []);
   
   function addFriend() {
     const newFriends = [...friends];
@@ -13,7 +24,7 @@ export default function App() {
 
     setPicture('');
     setName('');
-  }
+  };
 
   const friendInfo = friends.map((friend) => {
     return (
