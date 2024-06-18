@@ -5,6 +5,16 @@ export default function App() {
   const [picture, setPicture] = useState('');
   const [name, setName] = useState('');
   
+  function addFriend() {
+    const newFriends = [...friends];
+    const newFriend = { picture: picture, name: name };
+    newFriends.push(newFriend);
+    setFriends(newFriends);
+
+    setPicture('');
+    setName('');
+  }
+  
   return (<div>
     <label htmlFor="picture">Picture:</label>
     <input 
@@ -22,6 +32,6 @@ export default function App() {
       onChange={(e) => setName(e.target.value)} 
     />
 
-    <button type="button">Add Friend</button>
+    <button type="button" onClick={addFriend}>Add Friend</button>
   </div>);
 }
